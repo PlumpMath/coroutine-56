@@ -23,7 +23,7 @@ public class TestCoroutineWithoutUnity
         {
            Console.WriteLine(" --> Result is: "+e.Current);
         }
-        Log("End Iteration of Coroutine()");
+        Log("in TestCoroutineWithoutUnity.Start() - End Iteration of Coroutine()");
     }
 
     public void Update()

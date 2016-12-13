@@ -22,6 +22,8 @@ namespace tests
         {
             Init();
             tc.Start();
+            Console.Write("Log Report");
+            Console.Write("----------");
             Console.Write(tc.report);
         }
 
