@@ -1,0 +1,35 @@
+
+Message	1: Before StartCoroutine()
+1: Beginning of Outer()
+1: Beginning of Inner1()
+1: After StartCoroutine()
+1: ---> Called from Update
+2: ---> Called from Update
+2: Returned Value from From Inner1 is: Running
+2: Middle of Inner1()
+2: Beginning of Inner2()
+3: ---> Called from Update
+3: Returned Value from From Inner1 is: Running
+3: Middle of Inner2()
+4: ---> Called from Update
+4: Returned Value from From Inner1 is: Success
+4: End of Inner2()
+5: ---> Called from Update
+5: Returned Value from From Inner1 is: Success
+5: End of Inner1()
+5: Middle of Outer()
+5: Beginning of Inner3()
+6: ---> Called from Update
+6: Returned Value from From Inner3 is: Running
+6: Middle of Inner3()
+6: Beginning of Inner4()
+7: ---> Called from Update
+7: Returned Value from From Inner3 is: Running
+7: Middle of Inner4()
+8: ---> Called from Update
+8: Returned Value from From Inner3 is: Success
+8: End of Inner4()
+9: ---> Called from Update
+9: Returned Value from From Inner3 is: Success
+9: End of Inner3()
+9: End of Outer() - Done=true	Solution 'coroutine' ?(1 project)	Assets/TestCoroutine.cs	55	
