@@ -13,12 +13,18 @@ using System.Collections;
 public class ExampleNetworkManager : NATTraversal.NetworkManager
 {
     
- 
+#if UNITY_5_5
     public override void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList)
     {
         int matchCount = matchList.Count;
         MatchInfoSnapshot match = null;
-
+#else
+    public override void OnMatchList(ListMatchResponse matchList)
+    {
+        bool success = matchList.success;
+        int matchCount = matchList.matches.Count;
+        MatchDesc match = null;
+#endif
         if (!success)
         {
             Debug.Log("Failed to retrieve match list");
@@ -37,9 +43,12 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
             // try and join our own old match. This can happen when quickly switching
             // from hosting to joining because old matches are not cleaned up immediately
             // and there's no way to be notified when they are cleaned up
- 
+#if UNITY_5_5
             foreach (MatchInfoSnapshot m in matchList)
-        {
+#else
+            foreach (MatchDesc m in matchList.matches)
+#endif
+            {
                 string[] parts = m.name.Split(':');
                 ulong hostGUID;
                 ulong.TryParse(parts[parts.Length - 1], out hostGUID);
@@ -55,9 +64,12 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
             }
         }
         else
-        { 
+        {
+#if UNITY_5_5
             match = matchList[0];
- 
+#else
+            match = matchList.matches[0];
+#endif
         }
 
         if (match == null)
@@ -84,9 +96,12 @@ public class ExampleNetworkManager : NATTraversal.NetworkManager
         if (GUI.Button(new Rect(10, 110, 150, 100), "Join"))
         {
             if (matchMaker == null) matchMaker = gameObject.AddComponent<NetworkMatch>();
- 
+
+#if UNITY_5_5
             matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
- 
+#else
+            matchMaker.ListMatches(0, 10, "", OnMatchList);
+#endif
         }
         if (GUI.Button(new Rect(10, 210, 150, 100), "Disconnect"))
         {
